@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustafa Efe Aydın | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- AYARLAR (MÜHENDİS TEMASI) --- */
+        :root {
+            --bg-color: #0a192f;        
+            --text-color: #8892b0;      
+            --highlight: #64ffda;       
+            --white: #e6f1ff;           
+            --card-bg: #112240;         
+            --font-main: 'Fira Code', monospace; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #495670; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--highlight); }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 80px;
+            padding-bottom: 100px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .intro-text { color: var(--highlight); font-size: 1.1rem; margin-bottom: 15px; }
+        
+        h1 {
+            color: var(--white);
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 3rem;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .description {
+            max-width: 540px;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .social-links { display: flex; gap: 20px; margin-bottom: 40px; }
+        
+        .social-icon {
+            color: var(--white);
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .social-icon:hover { color: var(--highlight); transform: translateY(-3px); }
+
+        .btn {
+            display: inline-block;
+            color: var(--highlight);
+            border: 1px solid var(--highlight);
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+
+        /* --- BÖLÜMLER --- */
+        section { margin-top: 120px; }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 300px;
+            height: 1px;
+            background: #233554;
+            margin-left: 20px;
+        }
+        
+        .section-title span { color: var(--highlight); margin-right: 10px; font-size: 1.4rem; }
+
+        /* Proje Kartları */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: transform 0.2s, border-color 0.2s;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            border-color: var(--highlight);
+        }
+
+        .folder-icon { color: var(--highlight); font-size: 2.5rem; margin-bottom: 20px; }
+        
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .repo-link { color: var(--text-color); font-size: 1.5rem; transition: color 0.2s; }
+        .repo-link:hover { color: var(--highlight); }
+
+        .project-title { color: var(--white); font-size: 1.4rem; margin-bottom: 10px; font-weight: 600; }
+        .project-desc { font-size: 0.95rem; margin-bottom: 20px; }
+        
+        .tech-stack { 
+            font-size: 0.8rem; 
+            color: var(--highlight);
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        /* --- YETENEKLER --- */
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(140px, 200px));
+            gap: 10px;
+            list-style: none;
+            margin-top: 20px;
+        }
+        .skills-list li { position: relative; padding-left: 20px; }
+        .skills-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 100px;
+            padding-bottom: 30px;
+            font-size: 0.85rem;
+            color: #5d6881;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .section-title::after { width: 100%; }
+        }
+
+        .cursor { display: inline-block; width: 10px; background-color: var(--highlight); animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="hero">
+            <p class="intro-text">Merhaba, ben</p>
+            <h1>Mustafa Efe Aydın</h1>
+            <h2><span id="typewriter"></span><span class="cursor">&nbsp;</span></h2>
+            
+            <p class="description">
+                İstanbul Arel Üniversitesi Bilgisayar Mühendisliği öğrencisiyim.
+                <br>
+                Veri tabanı mimarileri ve ağ algoritmaları üzerine yoğunlaşıyorum.
+                <br><br>
+                Yazılım dünyasında Python ile programlama ve algoritma geliştirme konularına odaklanıyorum. 
+                Buna ek olarak, SQL ile ilişkisel veritabanı yönetimi ve veri sorgulama konularında kendimi geliştiriyorum
+            </p>
+
+            <div class="social-links">
+                <a href="https://github.com/Karasilyus" target="_blank" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/mustafaefeaydın/" target="_blank" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="karasilyus@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div>
+                <a href="https://github.com/Karasilyus?tab=repositories" target="_blank" class="btn">Projelerimi İncele</a>
+            </div>
+        </div>
+
+        <section id="about">
+            <h3 class="section-title"><span>01.</span> Hakkımda</h3>
+            <div style="max-width: 700px;">
+                <p>
+                    Merhaba! Ben Mustafa Efe. Yazılımla tanıştığım günden beri "işin mutfağında" olmayı sevdim. 
+                    GitHub'da aktif olmayı ve öğrendiklerimi açık kaynak projeye dönüştürmeyi önemsiyorum.
+                </p>
+                <br>
+                <p>Şu an aktif olarak kullandığım teknolojiler:</p>
+                <ul class="skills-list">
+                    <li>Python (AI/ML)</li>
+                    <li>TypeScript</li>
+                    <li>C / C++</li>
+                    <li>SQL (MySQL/MSSQL)</li>
+                    <li>Linux / Bash</li>
+                    <li>Git & GitHub</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h3 class="section-title"><span>02.</span> GitHub Projelerim</h3>
+            
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <a href="https://github.com/Karasilyus/DRL_Maze" target="_blank" class="repo-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div>
+                        <div class="project-title">DRL_Maze</div>
+                        <p class="project-desc">Derin Pekiştirmeli Öğrenme (Deep RL) algoritmaları ile labirent çözen otonom yapay zeka ajanı.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>Reinforcement Learning</span>
+                        <span>AI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <a href="https://github.com/Karasilyus/Hastane-Randevu-Sistemi" target="_blank" class="repo-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div>
+                        <div class="project-title">Hastane Randevu Sis.</div>
+                        <p class="project-desc">TypeScript kullanılarak tasarlanmış, hastane randevularını yöneten kapsamlı bir sistem.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>TypeScript</span>
+                        <span>System Design</span>
+                        <span>Automation</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <a href="https://github.com/Karasilyus/2048-Game" target="_blank" class="repo-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div>
+                        <div class="project-title">2048 Game</div>
+                        <p class="project-desc">Ders aralarında geliştirdiğim, Python tabanlı klasik 2048 bulmaca oyunu.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>Game Dev</span>
+                        <span>Logic</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <a href="https://github.com/Karasilyus/To-Do-List" target="_blank" class="repo-link"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div>
+                        <div class="project-title">To-Do List</div>
+                        <p class="project-desc">Staj süreci için geliştirdiğim, görev yönetimini ve takibini sağlayan kişisel uygulama.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>Productivity</span>
+                        <span>Tools</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with <i class="fas fa-code" style="color: var(--highlight);"></i> by Mustafa Efe Aydın</p>
+            <p style="margin-top: 10px; opacity: 0.5;">&copy; 2026 Karasilyus</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const textElement = document.getElementById('typewriter');
+        const phrases = [
+            "Bilgisayar Mühendisliği Öğrencisiyim.", 
+            "Yapay Zeka Geliştiricisiyim.", 
+            "Açık Kaynak Gönüllüsüyüm."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 40; 
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; 
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
+    </script>
+</body>
+</html>
